@@ -1,0 +1,307 @@
+<!doctype html><html lang="pt-BR"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<a href="../../" style="display:block;text-align:center;padding:10px 16px;font:600 13px/1.2 system-ui,sans-serif;background:#1E5A4B;color:#F4F1E6;text-decoration:none">← Voltar ao portfólio de Romário Alves</a>
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Studio Áurea Estética</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400&family=Mulish:wght@400;500;600;700&display=swap">
+<style>
+  /* Layout: coluna estreita de leitura clinica; o seletor de protocolo abre a pagina, tabela de sessoes fecha */
+  :root{
+    --bg:#FBFAF8;
+    --panel:#FFFFFF;
+    --line:#E6E1E4;
+    --fg:#241E26;
+    --muted:#6C6370;
+    --orchid:#8E4585;
+    --orchid-soft:#F3EAF2;
+    --sage:#3F7A6B;
+    --display:"Fraunces", Georgia, "Times New Roman", serif;
+    --body:"Mulish", system-ui, -apple-system, Segoe UI, sans-serif;
+    color-scheme:light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1A161C; --panel:#231E26; --line:#372F3A;
+      --fg:#F0EAF0; --muted:#A79EAA; --orchid:#C98BC0; --orchid-soft:#2C2430; --sage:#6FAE9B;
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1A161C; --panel:#231E26; --line:#372F3A;
+    --fg:#F0EAF0; --muted:#A79EAA; --orchid:#C98BC0; --orchid-soft:#2C2430; --sage:#6FAE9B;
+    color-scheme:dark;
+  }
+
+  *{box-sizing:border-box}
+  body{background:var(--bg); color:var(--fg); font-family:var(--body); line-height:1.65; margin:0}
+  .wrap{max-width:46rem; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+  .wide{max-width:60rem}
+  h1,h2,h3{font-family:var(--display); font-weight:600; margin:0; line-height:1.15; text-wrap:balance}
+  .eyebrow{font-size:.78rem; text-transform:uppercase; letter-spacing:.16em; color:var(--orchid); font-weight:700; margin:0}
+
+  .demo{font-size:.7rem; text-transform:uppercase; letter-spacing:.18em; color:var(--muted);
+        text-align:center; padding-block:.5rem; border-bottom:1px solid var(--line); margin:0}
+
+  header.hero{padding-block:3.2rem 2.4rem; text-align:center}
+  .hero h1{font-size:clamp(2.2rem,8vw,3.6rem); font-variation-settings:"SOFT" 40, "WONK" 1}
+  .hero h1 em{font-style:italic; color:var(--orchid)}
+  .hero p{color:var(--muted); font-size:1.08rem; max-width:32rem; margin:1rem auto 0}
+  .hero .meta{font-size:.85rem; color:var(--muted); margin-top:1.4rem; letter-spacing:.04em}
+
+  section{padding-block:2.6rem; border-top:1px solid var(--line)}
+  .sec-head{margin-bottom:1.5rem}
+  .sec-head h2{font-size:clamp(1.5rem,5vw,2.1rem); margin-top:.3rem}
+  .sec-head p.sub{color:var(--muted); margin:.5rem 0 0}
+
+  .qa{margin-bottom:1.4rem}
+  .q{font-weight:600; font-size:.95rem; margin:0 0 .6rem}
+  .opts{display:flex; flex-wrap:wrap; gap:.5rem}
+  .opt{font-family:var(--body); font-size:.9rem; background:var(--panel); color:var(--fg);
+       border:1px solid var(--line); border-radius:999px; padding:.5rem .95rem; cursor:pointer; line-height:1.3}
+  .opt[aria-pressed="true"]{background:var(--orchid); border-color:var(--orchid); color:#FFFFFF; font-weight:600}
+  .opt:focus-visible{outline:2px solid var(--orchid); outline-offset:2px}
+
+  .result{background:var(--orchid-soft); border:1px solid var(--line); border-left:3px solid var(--orchid); padding:1.3rem}
+  .result .eyebrow{color:var(--orchid)}
+  .result h3{font-size:1.4rem; margin-top:.35rem}
+  .result p.why{margin:.6rem 0 0; color:var(--muted)}
+  .result .nums{display:flex; flex-wrap:wrap; gap:1.6rem; margin-top:1.1rem}
+  .result .nums div{min-width:0}
+  .result .nums dt{font-size:.74rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); font-weight:700}
+  .result .nums dd{margin:.1rem 0 0; font-family:var(--display); font-size:1.5rem; font-variant-numeric:tabular-nums; line-height:1.1}
+  .result .note{margin:1rem 0 0; font-size:.88rem; color:var(--sage); font-weight:600}
+
+  table.svc{width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums}
+  table.svc caption{text-align:left; font-size:.8rem; text-transform:uppercase; letter-spacing:.12em;
+                    color:var(--muted); font-weight:700; padding-bottom:.6rem}
+  table.svc th{text-align:left; font-size:.74rem; text-transform:uppercase; letter-spacing:.1em;
+               color:var(--muted); font-weight:700; padding-block:.5rem; border-bottom:1px solid var(--line)}
+  table.svc th.r, table.svc td.r{text-align:right}
+  table.svc td{padding-block:.7rem; border-bottom:1px solid var(--line); vertical-align:top}
+  table.svc td b{font-weight:600; display:block}
+  table.svc td small{color:var(--muted); font-size:.85rem; display:block; line-height:1.4}
+  table.svc td.r{white-space:nowrap; font-family:var(--display); font-size:1.02rem}
+  .scroller{overflow-x:auto}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(13rem,1fr)); gap:1rem}
+  .card{background:var(--panel); border:1px solid var(--line); padding:1.2rem; min-width:0}
+  .card h3{font-size:1.1rem}
+  .card p{color:var(--muted); font-size:.9rem; margin:.4rem 0 0}
+  .card .step{font-family:var(--display); font-size:.9rem; color:var(--orchid); font-weight:700}
+
+  blockquote{margin:0; padding:0}
+  blockquote p{font-family:var(--display); font-style:italic; font-size:1.15rem; margin:0}
+  blockquote cite{display:block; margin-top:.6rem; font-size:.82rem; text-transform:uppercase;
+                  letter-spacing:.1em; color:var(--muted); font-style:normal; font-weight:700}
+
+  dl.info{margin:0}
+  dl.info dt{font-size:.76rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); font-weight:700; margin-top:1rem}
+  dl.info dd{margin:.15rem 0 0}
+  .fill{color:var(--orchid); font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; font-weight:700}
+
+  .cta{text-align:center}
+  .btn{display:inline-block; background:var(--orchid); color:#FFFFFF; text-decoration:none; font-weight:700;
+       font-size:.92rem; letter-spacing:.04em; padding:.85rem 1.7rem; border-radius:999px; margin-top:1.1rem}
+  .btn:focus-visible{outline:2px solid var(--fg); outline-offset:3px}
+
+  footer{border-top:1px solid var(--line); padding-block:1.8rem; color:var(--muted); font-size:.85rem; text-align:center}
+  footer p{margin:0}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important; animation:none!important}}
+</style>
+
+<p class="demo">Modelo demonstrativo &middot; conte&uacute;do de exemplo</p>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">Est&eacute;tica facial e corporal</p>
+    <h1>Studio <em>&Aacute;urea</em></h1>
+    <p>Protocolos montados depois da avalia&ccedil;&atilde;o, n&atilde;o antes. Cada sess&atilde;o come&ccedil;a com ficha de anamnese e termina com o retorno j&aacute; marcado.</p>
+    <p class="meta">Atendimento por hora marcada &middot; cabine individual &middot; Rua Bela Vista, 302</p>
+  </header>
+</div>
+
+<div class="wrap">
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Avalia&ccedil;&atilde;o r&aacute;pida</p>
+      <h2>Qual protocolo &eacute; pro seu caso?</h2>
+      <p class="sub">Duas perguntas. A sugest&atilde;o abaixo &eacute; um ponto de partida &mdash; o protocolo final sai na avalia&ccedil;&atilde;o presencial.</p>
+    </div>
+
+    <div class="qa">
+      <p class="q">1. O que mais te incomoda hoje?</p>
+      <div class="opts" id="q1">
+        <button class="opt" data-v="acne" aria-pressed="true">Acne e oleosidade</button>
+        <button class="opt" data-v="manchas" aria-pressed="false">Manchas e melasma</button>
+        <button class="opt" data-v="firmeza" aria-pressed="false">Linhas e firmeza</button>
+        <button class="opt" data-v="olhar" aria-pressed="false">Sobrancelha e c&iacute;lios</button>
+        <button class="opt" data-v="corpo" aria-pressed="false">Medidas e celulite</button>
+      </div>
+    </div>
+
+    <div class="qa">
+      <p class="q">2. J&aacute; fez algum procedimento est&eacute;tico antes?</p>
+      <div class="opts" id="q2">
+        <button class="opt" data-v="nao" aria-pressed="true">&Eacute; a primeira vez</button>
+        <button class="opt" data-v="sim" aria-pressed="false">J&aacute; fiz outros</button>
+      </div>
+    </div>
+
+    <div class="result" id="result" aria-live="polite"></div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Tabela completa</p>
+      <h2>Servi&ccedil;os e pacotes</h2>
+      <p class="sub">Pacote fechado tem pre&ccedil;o por sess&atilde;o menor e as datas garantidas na agenda.</p>
+    </div>
+    <div class="scroller">
+      <table class="svc">
+        <caption>Facial</caption>
+        <thead><tr><th>Protocolo</th><th class="r">Sess&otilde;es</th><th class="r">Pacote</th><th class="r">Por sess&atilde;o</th></tr></thead>
+        <tbody>
+          <tr><td><b>Limpeza de pele profunda</b><small>Extra&ccedil;&atilde;o, alta frequ&ecirc;ncia e m&aacute;scara calmante</small></td><td class="r">1</td><td class="r">R$ 180</td><td class="r">R$ 180</td></tr>
+          <tr><td><b>Pele Limpa</b><small>Limpeza + peeling de &aacute;cido salic&iacute;lico, a cada 21 dias</small></td><td class="r">4</td><td class="r">R$ 680</td><td class="r">R$ 170</td></tr>
+          <tr><td><b>Clareador</b><small>Peeling qu&iacute;mico e microagulhamento para manchas</small></td><td class="r">5</td><td class="r">R$ 1.150</td><td class="r">R$ 230</td></tr>
+          <tr><td><b>Firmeza</b><small>Radiofrequ&ecirc;ncia e microagulhamento com dermaroller</small></td><td class="r">6</td><td class="r">R$ 1.380</td><td class="r">R$ 230</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="scroller" style="margin-top:2rem">
+      <table class="svc">
+        <caption>Olhar</caption>
+        <thead><tr><th>Procedimento</th><th class="r">Dura&ccedil;&atilde;o</th><th class="r">Valor</th><th class="r">Retoque</th></tr></thead>
+        <tbody>
+          <tr><td><b>Design de sobrancelha com henna</b><small>Medi&ccedil;&atilde;o com paqu&iacute;metro e corre&ccedil;&atilde;o de falhas</small></td><td class="r">50 min</td><td class="r">R$ 90</td><td class="r">15 dias</td></tr>
+          <tr><td><b>Lash lifting</b><small>Curvatura natural, sem extens&atilde;o</small></td><td class="r">1h10</td><td class="r">R$ 150</td><td class="r">45 dias</td></tr>
+          <tr><td><b>Micropigmenta&ccedil;&atilde;o fio a fio</b><small>Inclui a sess&atilde;o de retoque obrigat&oacute;ria</small></td><td class="r">2h30</td><td class="r">R$ 650</td><td class="r">30 dias</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="scroller" style="margin-top:2rem">
+      <table class="svc">
+        <caption>Corporal</caption>
+        <thead><tr><th>Protocolo</th><th class="r">Sess&otilde;es</th><th class="r">Pacote</th><th class="r">Por sess&atilde;o</th></tr></thead>
+        <tbody>
+          <tr><td><b>Massagem modeladora</b><small>Manobras firmes com foco em medidas</small></td><td class="r">10</td><td class="r">R$ 950</td><td class="r">R$ 95</td></tr>
+          <tr><td><b>Drenagem linf&aacute;tica</b><small>Indicada tamb&eacute;m no p&oacute;s-operat&oacute;rio</small></td><td class="r">10</td><td class="r">R$ 900</td><td class="r">R$ 90</td></tr>
+          <tr><td><b>Modelador completo</b><small>Modeladora + drenagem alternadas, 2x por semana</small></td><td class="r">12</td><td class="r">R$ 1.260</td><td class="r">R$ 105</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<div class="wrap wide">
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Como funciona</p>
+      <h2>Da primeira mensagem ao retorno</h2>
+    </div>
+    <div class="grid">
+      <article class="card"><p class="step">Etapa 1</p><h3>Avalia&ccedil;&atilde;o</h3><p>30 minutos, sem custo. Ficha de anamnese, an&aacute;lise da pele e fotos de acompanhamento.</p></article>
+      <article class="card"><p class="step">Etapa 2</p><h3>Protocolo</h3><p>Voc&ecirc; recebe o plano por escrito: quantas sess&otilde;es, intervalo entre elas e o valor fechado.</p></article>
+      <article class="card"><p class="step">Etapa 3</p><h3>Sess&otilde;es</h3><p>Datas reservadas na agenda de uma vez, com lembrete no WhatsApp um dia antes.</p></article>
+      <article class="card"><p class="step">Etapa 4</p><h3>Retorno</h3><p>21 dias depois da &uacute;ltima sess&atilde;o, com as fotos lado a lado e ajuste do cuidado em casa.</p></article>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section>
+    <blockquote>
+      <p>&ldquo;Me explicaram quantas sess&otilde;es eu ia precisar e quanto ia custar no primeiro dia. Nunca tinha acontecido isso comigo.&rdquo;</p>
+      <cite>Let&iacute;cia M. &middot; protocolo Clareador</cite>
+    </blockquote>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Contato e agenda</p>
+      <h2>Marcar avalia&ccedil;&atilde;o</h2>
+    </div>
+    <dl class="info">
+      <dt>WhatsApp</dt><dd>(00) 00000-0000 <span class="fill">&larr; n&uacute;mero do cliente entra aqui</span></dd>
+      <dt>Endere&ccedil;o</dt><dd>Rua Bela Vista, 302 &middot; sala 4</dd>
+      <dt>Atendimento</dt><dd>Ter&ccedil;a a sexta, 9h &agrave;s 19h &middot; s&aacute;bado, 9h &agrave;s 14h</dd>
+      <dt>Instagram</dt><dd>@studioaureaestetica</dd>
+      <dt>Pagamento</dt><dd>Pix, d&eacute;bito e cr&eacute;dito em at&eacute; 6x nos pacotes</dd>
+    </dl>
+    <p class="cta"><a class="btn" href="#">Falar no WhatsApp</a></p>
+  </section>
+
+  <footer>
+    <p>Studio &Aacute;urea &middot; conte&uacute;do de exemplo para demonstra&ccedil;&atilde;o de layout. Nenhuma empresa real est&aacute; representada nesta p&aacute;gina.</p>
+  </footer>
+</div>
+
+<script>
+  var PROTO = {
+    acne: {
+      nome:"Protocolo Pele Limpa",
+      why:"Acne ativa e oleosidade respondem melhor a limpeza profunda combinada com peeling de ácido salicílico, respeitando 21 dias entre as sessões.",
+      sessoes:"4 sessões", pacote:"R$ 680", porSessao:"R$ 170"
+    },
+    manchas: {
+      nome:"Protocolo Clareador",
+      why:"Manchas e melasma pedem peeling químico alternado com microagulhamento, sempre com protetor solar como parte do tratamento.",
+      sessoes:"5 sessões", pacote:"R$ 1.150", porSessao:"R$ 230"
+    },
+    firmeza: {
+      nome:"Protocolo Firmeza",
+      why:"Para linhas finas e perda de firmeza, radiofrequência e microagulhamento trabalham juntos no estímulo de colágeno.",
+      sessoes:"6 sessões", pacote:"R$ 1.380", porSessao:"R$ 230"
+    },
+    olhar: {
+      nome:"Design com henna + lash lifting",
+      why:"O desenho da sobrancelha é medido com paquímetro antes da henna, e o lash lifting dá curvatura sem precisar de extensão.",
+      sessoes:"Sessão única", pacote:"R$ 230", porSessao:"R$ 90 + R$ 150"
+    },
+    corpo: {
+      nome:"Protocolo Modelador completo",
+      why:"Medidas e celulite respondem a modeladora e drenagem alternadas, duas vezes por semana, sem intervalo longo entre sessões.",
+      sessoes:"12 sessões", pacote:"R$ 1.260", porSessao:"R$ 105"
+    }
+  };
+
+  var escolha = {q1:"acne", q2:"nao"};
+
+  function render(){
+    var p = PROTO[escolha.q1];
+    var nota = escolha.q2 === "nao"
+      ? "Primeira vez: a avaliação de 30 minutos é gratuita e sai com teste de sensibilidade."
+      : "Já fez outros procedimentos: traga o histórico e as datas, isso muda o intervalo entre as sessões.";
+
+    document.getElementById("result").innerHTML =
+      '<p class="eyebrow">Sugestão para o seu caso</p>' +
+      '<h3>' + p.nome + '</h3>' +
+      '<p class="why">' + p.why + '</p>' +
+      '<dl class="nums">' +
+        '<div><dt>Sessões</dt><dd>' + p.sessoes + '</dd></div>' +
+        '<div><dt>Pacote fechado</dt><dd>' + p.pacote + '</dd></div>' +
+        '<div><dt>Por sessão</dt><dd>' + p.porSessao + '</dd></div>' +
+      '</dl>' +
+      '<p class="note">' + nota + '</p>';
+  }
+
+  function bind(groupId, key){
+    var group = document.getElementById(groupId);
+    group.addEventListener("click", function(ev){
+      var btn = ev.target.closest ? ev.target.closest(".opt") : null;
+      if (!btn) return;
+      var all = group.querySelectorAll(".opt");
+      for (var i = 0; i < all.length; i++){ all[i].setAttribute("aria-pressed", "false"); }
+      btn.setAttribute("aria-pressed", "true");
+      escolha[key] = btn.getAttribute("data-v");
+      render();
+    });
+  }
+
+  bind("q1", "q1");
+  bind("q2", "q2");
+  render();
+</script>
+
+</body></html>

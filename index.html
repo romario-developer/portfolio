@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Romário Alves · Front-end</title>
+<meta name="description" content="Portfólio de Romário Alves, desenvolvedor front-end júnior: jogos 2D com PixiJS, React e TypeScript, e sistemas web para pequenos negócios.">
+<meta property="og:title" content="Romário Alves · Desenvolvedor Front-end">
+<meta property="og:description" content="Jogos 2D com PixiJS, React e TypeScript, e sistemas web para pequenos negócios.">
+<meta property="og:image" content="img/selva.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231E5A4B'/%3E%3Ctext x='32' y='44' font-family='Arial Black,Arial' font-size='30' font-weight='900' fill='%23F2C46B' text-anchor='middle'%3ERA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+  /* Layout: coluna única de 72rem; o jogo abre a página como peça principal, os outros projetos vêm em grade de 2,
+     e currículo (habilidades, formação, contato) fecha em faixas curtas. */
+  :root {
+    --paper: #EDF0EA;
+    --surface: #FFFFFF;
+    --ink: #13221E;
+    --muted: #55655E;
+    --line: #D3DAD2;
+    --brass: #9C6B12;
+    --jungle: #1E5A4B;
+    --on-jungle: #F4F1E6;
+
+    --display: "Bricolage Grotesque", "Arial Narrow", Arial, sans-serif;
+    --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0E1614; --surface: #15201D; --ink: #E8EEE9; --muted: #97A79F; --line: #263430;
+      --brass: #E0AE4F; --jungle: #2E7A66; --on-jungle: #F4F1E6;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0E1614; --surface: #15201D; --ink: #E8EEE9; --muted: #97A79F; --line: #263430;
+    --brass: #E0AE4F; --jungle: #2E7A66; --on-jungle: #F4F1E6;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { background: var(--paper); scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 16px/1.6 var(--body);
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  .wrap {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding-left: max(20px, env(safe-area-inset-left, 0px));
+    padding-right: max(20px, env(safe-area-inset-right, 0px));
+  }
+
+  h1, h2, h3 { font-family: var(--display); margin: 0; line-height: 1.05; text-wrap: balance; }
+  .label {
+    font: 600 12px/1.3 var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--brass);
+    margin: 0;
+  }
+
+  /* ---------- topo */
+  .nav {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding-block: 20px;
+    font: 500 14px/1 var(--body);
+  }
+  .nav .mark { font: 800 18px/1 var(--display); text-decoration: none; letter-spacing: -0.01em; }
+  .nav ul { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
+  .nav ul a { text-decoration: none; color: var(--muted); }
+  .nav ul a:hover { color: var(--ink); }
+  @media (max-width: 560px) { .nav ul { display: none; } }
+
+  .hero { padding-block: 56px 48px; display: grid; gap: 20px; }
+  .hero h1 {
+    font-size: clamp(48px, 9vw, 104px);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+  }
+  .hero h1 span { color: var(--jungle); }
+  .lede { font-size: clamp(18px, 2.2vw, 21px); max-width: 38rem; margin: 0; color: var(--ink); }
+  .lede em { font-style: normal; color: var(--brass); font-weight: 600; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0; color: var(--muted); font-size: 15px; }
+  .meta span::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--jungle); margin-right: 8px; vertical-align: middle; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    min-height: 46px; padding: 0 20px;
+    border-radius: 999px;
+    border: 1.5px solid var(--ink);
+    font: 600 15px/1 var(--body);
+    text-decoration: none;
+    color: var(--ink);
+    background: transparent;
+    cursor: pointer;
+    transition: background 120ms ease, color 120ms ease, transform 120ms ease;
+  }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  .btn.solid { background: var(--jungle); border-color: var(--jungle); color: var(--on-jungle); }
+  .btn.solid:hover { filter: brightness(1.08); }
+  .btn:focus-visible, a:focus-visible, button:focus-visible { outline: 3px solid var(--brass); outline-offset: 3px; }
+
+  section { padding-block: 56px; border-top: 1px solid var(--line); }
+  .head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin-bottom: 28px; }
+  .head h2 { font-size: clamp(30px, 4.4vw, 46px); font-weight: 800; letter-spacing: -0.025em; }
+  .head p { margin: 0; color: var(--muted); max-width: 32rem; }
+
+  /* ---------- projeto em destaque */
+  .feature {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 32px;
+    align-items: start;
+  }
+  @media (max-width: 880px) { .feature { grid-template-columns: minmax(0, 1fr); } }
+  .shot {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: #0d2622;
+    box-shadow: 0 20px 50px -24px rgba(10, 30, 25, 0.45);
+    aspect-ratio: 16 / 10;
+    max-width: 100%;
+  }
+  .shot img { width: 100%; height: 100%; object-fit: cover; }
+  .feature h3 { font-size: clamp(30px, 3.6vw, 40px); font-weight: 800; letter-spacing: -0.02em; margin-top: 8px; }
+  .feature .desc { margin: 12px 0 0; color: var(--muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 0; padding: 0; list-style: none; }
+  .chips li {
+    font: 500 12px/1 var(--mono);
+    padding: 6px 9px;
+    border-radius: 6px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .loop { margin: 22px 0 0; padding: 0; list-style: none; display: grid; gap: 0; }
+  .loop li {
+    display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 12px;
+    padding-block: 11px; border-top: 1px solid var(--line); font-size: 15px;
+  }
+  .loop li:last-child { border-bottom: 1px solid var(--line); }
+  .loop b { font: 600 12px/1.6 var(--mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--jungle); }
+  @media (max-width: 420px) { .loop li { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+  .feature .actions { margin-top: 22px; }
+
+  /* ---------- outros projetos */
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  @media (max-width: 760px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+  .card { display: grid; gap: 14px; align-content: start; min-width: 0; }
+  .card .shot { border-radius: 14px; box-shadow: none; background: var(--surface); }
+  .card h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.015em; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+  .card .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+  .tag {
+    font: 600 11px/1 var(--mono); text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 5px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted);
+  }
+  .tag.live { color: var(--jungle); border-color: var(--jungle); }
+  .link { font-weight: 600; font-size: 15px; text-decoration-thickness: 1.5px; text-underline-offset: 4px; color: var(--jungle); }
+
+  /* Alves Gestão Pro: tela de login fica atrás de senha, então desenhamos um resumo do sistema */
+  .mock {
+    height: 100%; display: grid; grid-template-columns: 30% 1fr; background: #F5F7FA; color: #1B2430;
+    font: 500 12px/1.3 var(--body);
+  }
+  .mock aside { background: #14324F; color: #CFE0F2; padding: 16px 12px; display: grid; align-content: start; gap: 9px; }
+  .mock aside strong { color: #fff; font: 700 13px/1.2 var(--display); margin-bottom: 6px; }
+  .mock aside span.on { color: #fff; }
+  .mock main { padding: 16px; display: grid; grid-template-rows: auto auto 1fr; gap: 12px; min-width: 0; }
+  .mock .kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .mock .kpi { background: #fff; border: 1px solid #DDE3EA; border-radius: 8px; padding: 8px; }
+  .mock .kpi small { display: block; color: #66717F; font-size: 10px; }
+  .mock .kpi b { font: 700 15px/1.2 var(--display); }
+  .mock .rows { background: #fff; border: 1px solid #DDE3EA; border-radius: 8px; padding: 6px 10px; display: grid; }
+  .mock .rows div { display: flex; justify-content: space-between; gap: 8px; padding-block: 5px; border-top: 1px solid #EEF1F4; font-size: 11px; }
+  .mock .rows div:first-child { border-top: 0; }
+  .mock .st { color: #1E7B4E; font-weight: 600; }
+  .mock .st.w { color: #A16207; }
+  @media (max-width: 420px) { .mock { grid-template-columns: minmax(0, 1fr); } .mock aside { display: none; } }
+
+  .wip { margin: 28px 0 0; padding: 18px 20px; border-radius: 14px; border: 1px dashed var(--line); color: var(--muted); font-size: 15px; }
+  .wip b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- sobre / habilidades / formação */
+  .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; }
+  @media (max-width: 760px) { .split { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
+  .prose p { margin: 0 0 14px; max-width: 34rem; }
+  .prose p:last-child { margin: 0; }
+
+  dl.skills { margin: 0; display: grid; gap: 0; }
+  dl.skills div { display: grid; grid-template-columns: 8rem minmax(0, 1fr); gap: 12px; padding-block: 12px; border-top: 1px solid var(--line); }
+  dl.skills div:last-child { border-bottom: 1px solid var(--line); }
+  dl.skills dt { font: 600 12px/1.6 var(--mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+  dl.skills dd { margin: 0; }
+  @media (max-width: 420px) { dl.skills div { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+
+  ul.edu { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+  ul.edu li { display: grid; gap: 2px; }
+  ul.edu b { font: 700 19px/1.25 var(--display); }
+  ul.edu span { color: var(--muted); font-size: 15px; }
+
+  /* ---------- contato */
+  .contact { background: var(--jungle); color: var(--on-jungle); border-top: 0; }
+  .contact .head h2 { color: var(--on-jungle); }
+  .contact .head p { color: color-mix(in srgb, var(--on-jungle) 78%, transparent); }
+  .contact .label { color: #F2C46B; }
+  .ways { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 14px; }
+  .way {
+    display: grid; gap: 8px; align-content: start;
+    padding: 18px; border-radius: 14px;
+    background: color-mix(in srgb, #000 16%, transparent);
+    min-width: 0;
+  }
+  .way .value { font: 600 18px/1.3 var(--body); overflow-wrap: anywhere; user-select: all; }
+  .way .acts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .mini {
+    font: 600 13px/1 var(--body); padding: 9px 13px; border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--on-jungle) 45%, transparent);
+    color: var(--on-jungle); background: transparent; text-decoration: none; cursor: pointer;
+  }
+  .mini:hover { background: color-mix(in srgb, var(--on-jungle) 14%, transparent); }
+
+  footer { padding-block: 28px 40px; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .btn { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav class="nav" aria-label="Seções">
+    <a class="mark" href="#">Romário Alves</a>
+    <ul>
+      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <p class="label">Desenvolvedor Front-end Júnior · Jogos 2D e Web</p>
+    <h1>Romário <span>Alves</span></h1>
+    <p class="lede">Construo interfaces em <em>React</em> e <em>TypeScript</em> e jogos 2D com <em>PixiJS</em>, do protótipo jogável ao sistema publicado e usado por um negócio de verdade.</p>
+    <p class="meta"><span>Itiruçu – BA</span><span>Disponível para trabalho remoto</span></p>
+    <div class="actions">
+      <a class="btn solid" href="https://selva-777.romariotecla.workers.dev" target="_blank" rel="noopener">Jogar o Selva 777</a>
+      <a class="btn" href="https://github.com/romario-developer" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/romarioalvesdev" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </header>
+</div>
+
+<main>
+  <section id="projetos">
+    <div class="wrap">
+      <div class="head">
+        <h2>Projeto em destaque</h2>
+        <p>Um caça-níquel 2D jogável, com créditos fictícios, feito para mostrar como renderização, input, animação e estado se conectam.</p>
+      </div>
+
+      <article class="feature">
+        <a class="shot" href="https://selva-777.romariotecla.workers.dev" target="_blank" rel="noopener" aria-label="Abrir o Selva 777">
+          <img src="img/selva.jpg" alt="Tela do Selva 777: três rolos com símbolos de diamante alinhados na linha de pagamento, saldo, aposta e botão Girar" width="1120" height="700" loading="eager">
+        </a>
+        <div>
+          <p class="label">Jogo 2D · 2026</p>
+          <h3>Selva 777</h3>
+          <p class="desc">O resultado de cada giro vem de uma API; o jogo só anima até ele. Os rolos param em sequência, a linha acende e moedas sobem na vitória.</p>
+          <ul class="chips" aria-label="Tecnologias">
+            <li>PixiJS 8</li><li>React 18</li><li>TypeScript</li><li>Vite</li><li>WebSocket</li>
+          </ul>
+          <ol class="loop" aria-label="Como o jogo funciona">
+            <li><b>Renderização</b><span>Sprites com texturas pré-geradas, máscara por rolo e blur só quando visível.</span></li>
+            <li><b>Input</b><span>Botões em React e tecla Espaço disparam ações no estado, nunca direto no canvas.</span></li>
+            <li><b>Animação</b><span>Ticker do Pixi, easing de parada calculado para não dar solavanco, partículas.</span></li>
+            <li><b>Estado</b><span>Máquina de estados: parado, girando, parando, resultado. RTP calculado: 93,9%.</span></li>
+          </ol>
+          <div class="actions">
+            <a class="btn solid" href="https://selva-777.romariotecla.workers.dev" target="_blank" rel="noopener">Jogar</a>
+            <a class="btn" href="https://github.com/romario-developer/selva-777" target="_blank" rel="noopener">Ver o código</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="head">
+        <h2>Outros projetos</h2>
+        <p>Sistemas e sites para pequenos negócios. Os três sites são modelos demonstrativos, com conteúdo de exemplo.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <a class="shot" href="https://alves-gestao.romariotecla.workers.dev" target="_blank" rel="noopener" aria-label="Abrir o Alves Gestão Pro">
+            <div class="mock" aria-hidden="true">
+              <aside>
+                <strong>Alves Gestão Pro</strong>
+                <span class="on">Painel</span><span>Ordens de serviço</span><span>Clientes</span><span>Veículos</span><span>Estoque</span><span>Financeiro</span><span>Relatórios</span>
+              </aside>
+              <main>
+                <span>Hoje no lava-jato</span>
+                <div class="kpis">
+                  <div class="kpi"><small>Serviços</small><b>14</b></div>
+                  <div class="kpi"><small>Em andamento</small><b>3</b></div>
+                  <div class="kpi"><small>Caixa</small><b>R$ 1.240</b></div>
+                </div>
+                <div class="rows">
+                  <div><span>Lavagem completa · Onix</span><span class="st">Pronto</span></div>
+                  <div><span>Polimento · Hilux</span><span class="st w">Lavando</span></div>
+                  <div><span>Higienização · HB20</span><span class="st w">Na fila</span></div>
+                  <div><span>Lavagem simples · Strada</span><span class="st">Pronto</span></div>
+                </div>
+              </main>
+            </div>
+          </a>
+          <div class="row"><span class="tag live">No ar</span><span class="tag">Sistema web</span></div>
+          <h3>Alves Gestão Pro</h3>
+          <p>Gestão para lava-jato e estética automotiva: clientes, veículos, ordens de serviço, financeiro, estoque e relatórios, com login. Feito para o negócio do meu irmão.</p>
+          <a class="link" href="https://alves-gestao.romariotecla.workers.dev" target="_blank" rel="noopener">Abrir o sistema</a>
+        </article>
+
+        <article class="card">
+          <a class="shot" href="projetos/barbearia/" aria-label="Abrir o site da Barbearia Corte Fino">
+            <img src="img/barbearia.jpg" alt="Site da Barbearia Corte Fino em tema escuro, com status Aberto agora e botão Agendar no WhatsApp" width="1120" height="700" loading="lazy">
+          </a>
+          <div class="row"><span class="tag">Demonstração</span><span class="tag">Site</span></div>
+          <h3>Barbearia Corte Fino</h3>
+          <p>Status “aberto agora” calculado pelo horário de funcionamento, tabela de preços e agendamento pelo WhatsApp.</p>
+          <a class="link" href="projetos/barbearia/">Ver o site</a>
+        </article>
+
+        <article class="card">
+          <a class="shot" href="projetos/hamburgueria/" aria-label="Abrir o site da Brasa Burger">
+            <img src="img/hamburgueria.jpg" alt="Cardápio da Brasa Burger com burgers, preços e botões Adicionar" width="1120" height="700" loading="lazy">
+          </a>
+          <div class="row"><span class="tag">Demonstração</span><span class="tag">Cardápio</span></div>
+          <h3>Brasa Burger</h3>
+          <p>Cardápio com carrinho, taxa por bairro e pedido mínimo. Monta a mensagem pronta para mandar no WhatsApp da loja.</p>
+          <a class="link" href="projetos/hamburgueria/">Ver o site</a>
+        </article>
+
+        <article class="card">
+          <a class="shot" href="projetos/estetica/" aria-label="Abrir o site do Studio Áurea">
+            <img src="img/estetica.jpg" alt="Site do Studio Áurea com questionário de duas perguntas para sugerir um protocolo" width="1120" height="700" loading="lazy">
+          </a>
+          <div class="row"><span class="tag">Demonstração</span><span class="tag">Site</span></div>
+          <h3>Studio Áurea</h3>
+          <p>Questionário de duas perguntas que sugere o protocolo de tratamento, com sessões e valor do pacote.</p>
+          <a class="link" href="projetos/estetica/">Ver o site</a>
+        </article>
+      </div>
+
+      <p class="wip"><b>Em andamento:</b> chatbot de agendamento para barbearia e app de replay de futebol, ambos funcionando e em evolução.</p>
+    </div>
+  </section>
+
+  <section id="sobre">
+    <div class="wrap split">
+      <div>
+        <div class="head"><h2>Sobre</h2></div>
+        <div class="prose">
+          <p>Mexo com HTML há anos e transformei isso em projetos que resolvem problemas reais: o sistema do lava-jato do meu irmão, sites para comércios da região e, agora, jogos 2D.</p>
+          <p>Uso IA como ferramenta de produtividade e estudo, e faço questão de entender cada parte do código que entrego. Quero crescer num time que dê feedback de perto.</p>
+        </div>
+      </div>
+      <div>
+        <div class="head"><h2>Habilidades</h2></div>
+        <dl class="skills">
+          <div><dt>Linguagens</dt><dd>JavaScript (ES6+), TypeScript, HTML5, CSS3</dd></div>
+          <div><dt>Front-end</dt><dd>React (hooks, componentes, estado), layout responsivo</dd></div>
+          <div><dt>Jogos 2D</dt><dd>PixiJS: sprites, texturas, máscaras, filtros, Ticker, partículas</dd></div>
+          <div><dt>Integração</dt><dd>APIs REST, WebSocket, async/await</dd></div>
+          <div><dt>Ferramentas</dt><dd>Git, GitHub, Vite, npm, Cloudflare, DevTools</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap split">
+      <div class="head"><h2>Formação</h2></div>
+      <ul class="edu">
+        <li><b>Tecnologia da Informação</b><span>Faculdade Anhanguera · 1º semestre concluído, curso trancado</span></li>
+        <li><b>Desenvolvimento front-end</b><span>Alura · HTML, CSS e projetos de sites</span></li>
+        <li><b>HTML5, CSS3 e JavaScript</b><span>Curso em Vídeo · Gustavo Guanabara</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="contact" id="contato">
+    <div class="wrap">
+      <div class="head">
+        <h2>Vamos conversar</h2>
+        <p>Respondo rápido por WhatsApp e e-mail.</p>
+      </div>
+      <div class="ways">
+        <div class="way">
+          <p class="label">E-mail</p>
+          <span class="value" id="email">romariotecla@icloud.com</span>
+          <div class="acts">
+            <a class="mini" href="mailto:romariotecla@icloud.com">Escrever</a>
+            <button class="mini" type="button" data-copy="email">Copiar</button>
+          </div>
+        </div>
+        <div class="way">
+          <p class="label">WhatsApp</p>
+          <span class="value" id="fone">(73) 99161-0162</span>
+          <div class="acts">
+            <a class="mini" href="https://wa.me/5573991610162" target="_blank" rel="noopener">Abrir conversa</a>
+            <button class="mini" type="button" data-copy="fone">Copiar</button>
+          </div>
+        </div>
+        <div class="way">
+          <p class="label">Perfis</p>
+          <span class="value">github.com/romario-developer</span>
+          <div class="acts">
+            <a class="mini" href="https://github.com/romario-developer" target="_blank" rel="noopener">GitHub</a>
+            <a class="mini" href="https://www.linkedin.com/in/romarioalvesdev" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Romário Alves</span>
+    <span>Feito em HTML e CSS, publicado na Cloudflare</span>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var el = document.getElementById(btn.getAttribute('data-copy'));
+      var text = el.textContent.trim();
+      var done = function () {
+        var old = btn.textContent;
+        btn.textContent = 'Copiado';
+        setTimeout(function () { btn.textContent = old; }, 1500);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () { selectText(el); });
+      } else {
+        selectText(el);
+      }
+    });
+  });
+  function selectText(el) {
+    var range = document.createRange();
+    range.selectNodeContents(el);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+</script>
+</body>
+</html>

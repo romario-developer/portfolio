@@ -1,0 +1,269 @@
+<!doctype html><html lang="pt-BR"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<a href="../../" style="display:block;text-align:center;padding:10px 16px;font:600 13px/1.2 system-ui,sans-serif;background:#1E5A4B;color:#F4F1E6;text-decoration:none">← Voltar ao portfólio de Romário Alves</a>
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Barbearia Corte Fino</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400&family=Barlow+Condensed:wght@500;600&family=Karla:wght@400;500;700&display=swap">
+<style>
+  /* Layout: coluna unica; a tabela de precos e a espinha da pagina, bandas separadas por filete de poste de barbeiro */
+  :root{
+    --bg:#141815;
+    --panel:#1B211C;
+    --line:#2C342D;
+    --fg:#EDE7DA;
+    --muted:#99A39A;
+    --brass:#CBA74F;
+    --blood:#9A3528;
+    --steel:#2F4D74;
+    --display:"Bodoni Moda", Georgia, "Times New Roman", serif;
+    --label:"Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+    --body:"Karla", system-ui, -apple-system, Segoe UI, sans-serif;
+    color-scheme:dark;
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      --bg:#F6F5F1; --panel:#FFFFFF; --line:#DEE0D8;
+      --fg:#151A16; --muted:#5C655D; --brass:#8A6B1C; --blood:#8C2F23; --steel:#2A4468;
+      color-scheme:light;
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#F6F5F1; --panel:#FFFFFF; --line:#DEE0D8;
+    --fg:#151A16; --muted:#5C655D; --brass:#8A6B1C; --blood:#8C2F23; --steel:#2A4468;
+    color-scheme:light;
+  }
+
+  *{box-sizing:border-box}
+  body{background:var(--bg); color:var(--fg); font-family:var(--body); line-height:1.6; margin:0; padding-bottom:5.5rem}
+  .wrap{max-width:62rem; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+  h1,h2,h3{font-family:var(--display); font-weight:700; text-wrap:balance; margin:0; line-height:1.1}
+  .eyebrow{font-family:var(--label); text-transform:uppercase; letter-spacing:.16em; font-size:.8rem; color:var(--brass); margin:0}
+  .pole{height:6px; border:0; margin:0; background:repeating-linear-gradient(115deg, var(--blood) 0 10px, var(--fg) 10px 20px, var(--steel) 20px 30px)}
+
+  .demo{font-family:var(--label); text-transform:uppercase; letter-spacing:.18em; font-size:.7rem; color:var(--muted);
+        border-bottom:1px solid var(--line); padding-block:.55rem; text-align:center; margin:0}
+
+  header.hero{padding-block:3rem 2.5rem}
+  .hero h1{font-size:clamp(2.6rem,10vw,4.6rem); letter-spacing:-.01em}
+  .hero h1 em{font-style:italic; color:var(--brass)}
+  .lede{font-size:1.1rem; color:var(--muted); max-width:34rem; margin:.9rem 0 0}
+  .status{display:inline-flex; align-items:center; gap:.5rem; margin-top:1.4rem; padding:.4rem .85rem;
+          border:1px solid var(--line); border-radius:999px; font-family:var(--label); text-transform:uppercase;
+          letter-spacing:.1em; font-size:.8rem; background:var(--panel)}
+  .dot{width:.55rem; height:.55rem; border-radius:50%; background:var(--muted); flex:none}
+  .dot.on{background:#4FA86B} .dot.off{background:var(--blood)}
+  .hero-actions{display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.6rem}
+  .btn{font-family:var(--label); text-transform:uppercase; letter-spacing:.12em; font-size:.95rem;
+       padding:.8rem 1.4rem; border-radius:2px; text-decoration:none; border:1px solid var(--brass); display:inline-block}
+  .btn-solid{background:var(--brass); color:#141815; font-weight:600}
+  .btn-ghost{color:var(--fg)}
+  .btn:focus-visible{outline:2px solid var(--brass); outline-offset:3px}
+
+  section{padding-block:2.8rem}
+  .sec-head{margin-bottom:1.6rem}
+  .sec-head h2{font-size:clamp(1.7rem,5.5vw,2.4rem); margin-top:.35rem}
+
+  ul.menu{list-style:none; margin:0; padding:0}
+  ul.menu li{display:flex; align-items:baseline; padding-block:.75rem; border-bottom:1px solid var(--line)}
+  .svc{min-width:0}
+  .svc b{font-weight:500; font-size:1.05rem; display:block}
+  .svc small{color:var(--muted); font-size:.88rem; display:block; line-height:1.35}
+  .leader{flex:1 1 1.5rem; min-width:1.5rem; border-bottom:1px dotted var(--line); margin:0 .7rem .4rem}
+  .price{font-family:var(--display); font-size:1.2rem; font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--brass)}
+
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(14rem,1fr)); gap:1rem}
+  .card{background:var(--panel); border:1px solid var(--line); padding:1.3rem; min-width:0}
+  .card .initials{font-family:var(--display); font-size:1.9rem; color:var(--brass); line-height:1; margin:0}
+  .card h3{font-size:1.25rem; margin-top:.7rem}
+  .card p{color:var(--muted); font-size:.93rem; margin:.4rem 0 0}
+
+  table.hours{width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums}
+  table.hours th{text-align:left; font-family:var(--label); text-transform:uppercase; letter-spacing:.1em;
+                 font-size:.8rem; color:var(--muted); font-weight:500; padding-block:.6rem}
+  table.hours td{padding-block:.6rem; border-top:1px solid var(--line)}
+  table.hours td:last-child{text-align:right}
+  table.hours tr.today td{color:var(--brass); font-weight:700}
+
+  .two{display:grid; grid-template-columns:repeat(auto-fit,minmax(16rem,1fr)); gap:2rem}
+  .gal{display:grid; grid-template-columns:repeat(auto-fit,minmax(8rem,1fr)); gap:.6rem}
+  .ph{aspect-ratio:1; max-width:100%; border:1px dashed var(--line); display:grid; place-items:center;
+      font-family:var(--label); text-transform:uppercase; letter-spacing:.12em; font-size:.7rem; color:var(--muted)}
+
+  blockquote{margin:0; border-left:2px solid var(--brass); padding-left:1rem}
+  blockquote p{font-family:var(--display); font-style:italic; font-size:1.1rem; margin:0}
+  blockquote cite{font-family:var(--label); text-transform:uppercase; letter-spacing:.12em; font-size:.78rem;
+                  color:var(--muted); font-style:normal; display:block; margin-top:.5rem}
+
+  .contact dl{margin:0}
+  .contact dt{font-family:var(--label); text-transform:uppercase; letter-spacing:.12em;
+    font-size:.78rem; color:var(--muted); margin-top:1rem}
+  .contact dd{margin:.2rem 0 0; font-size:1.05rem}
+  .fill{color:var(--brass); font-family:var(--label); text-transform:uppercase; letter-spacing:.1em; font-size:.8rem}
+
+  footer{border-top:1px solid var(--line); padding-block:2rem; color:var(--muted); font-size:.88rem}
+  footer p{margin:0}
+
+  .bar{position:fixed; left:0; right:0; bottom:0; background:var(--panel); border-top:1px solid var(--line);
+       padding-block:.8rem; padding-bottom:calc(.8rem + env(safe-area-inset-bottom,0px)); z-index:5}
+  .bar .wrap{display:flex; align-items:center; justify-content:space-between; gap:1rem}
+  .bar span{font-family:var(--label); text-transform:uppercase; letter-spacing:.1em; font-size:.82rem; color:var(--muted); min-width:0}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important; animation:none!important}}
+</style>
+
+<p class="demo">Modelo demonstrativo &middot; conteudo de exemplo</p>
+<hr class="pole">
+
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">Desde 2014 &middot; Navalha e toalha quente</p>
+    <h1>Barbearia<br><em>Corte Fino</em></h1>
+    <p class="lede">Degrad&ecirc; feito na m&aacute;quina e acabado na navalha. Barba com toalha quente, &oacute;leo e balm. Sem fila: voc&ecirc; marca a hora e ela &eacute; sua.</p>
+    <p class="status"><span class="dot" id="dot"></span><span id="statusText">Conferindo hor&aacute;rio&hellip;</span></p>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="#contato">Agendar no WhatsApp</a>
+      <a class="btn btn-ghost" href="#precos">Ver a tabela</a>
+    </div>
+  </header>
+</div>
+
+<hr class="pole">
+
+<div class="wrap">
+  <section id="precos">
+    <div class="sec-head">
+      <p class="eyebrow">Tabela de servi&ccedil;os</p>
+      <h2>Pre&ccedil;os sem surpresa na cadeira</h2>
+    </div>
+    <ul class="menu">
+      <li><span class="svc"><b>Corte social</b><small>Tesoura e m&aacute;quina, acabamento na navalha</small></span><span class="leader"></span><span class="price">R$ 35</span></li>
+      <li><span class="svc"><b>Degrad&ecirc; &middot; fade</b><small>Navalhado, baixo, m&eacute;dio ou alto</small></span><span class="leader"></span><span class="price">R$ 45</span></li>
+      <li><span class="svc"><b>Barba na navalha</b><small>Toalha quente, &oacute;leo, p&oacute;s-barba e balm</small></span><span class="leader"></span><span class="price">R$ 35</span></li>
+      <li><span class="svc"><b>Combo corte + barba</b><small>Cerca de 1h10 na cadeira</small></span><span class="leader"></span><span class="price">R$ 70</span></li>
+      <li><span class="svc"><b>Pigmenta&ccedil;&atilde;o de barba</b><small>Preenche falhas e marca o contorno</small></span><span class="leader"></span><span class="price">R$ 25</span></li>
+      <li><span class="svc"><b>Sobrancelha na navalha</b><small>Limpeza e desenho</small></span><span class="leader"></span><span class="price">R$ 15</span></li>
+      <li><span class="svc"><b>Platinado</b><small>Descolora&ccedil;&atilde;o, matiza&ccedil;&atilde;o e hidrata&ccedil;&atilde;o</small></span><span class="leader"></span><span class="price">R$ 120</span></li>
+      <li><span class="svc"><b>Corte infantil</b><small>At&eacute; 10 anos, com cadeirinha</small></span><span class="leader"></span><span class="price">R$ 30</span></li>
+    </ul>
+  </section>
+
+  <section id="equipe">
+    <div class="sec-head">
+      <p class="eyebrow">Quem atende</p>
+      <h2>Tr&ecirc;s cadeiras, tr&ecirc;s especialidades</h2>
+    </div>
+    <div class="grid3">
+      <article class="card"><p class="initials">JR</p><h3>Jorge Ramos</h3><p>Dono da casa. Navalha e barba cl&aacute;ssica h&aacute; onze anos.</p></article>
+      <article class="card"><p class="initials">DM</p><h3>Diego Matos</h3><p>Degrad&ecirc; navalhado e freestyle. Atende melhor &agrave; tarde.</p></article>
+      <article class="card"><p class="initials">LA</p><h3>Lucas Alves</h3><p>Colora&ccedil;&atilde;o, platinado e corte infantil.</p></article>
+    </div>
+  </section>
+
+  <section id="galeria">
+    <div class="sec-head">
+      <p class="eyebrow">Trabalhos</p>
+      <h2>O corte antes de voc&ecirc; sentar</h2>
+    </div>
+    <div class="gal">
+      <div class="ph">foto 1</div><div class="ph">foto 2</div><div class="ph">foto 3</div>
+      <div class="ph">foto 4</div><div class="ph">foto 5</div><div class="ph">foto 6</div>
+    </div>
+  </section>
+
+  <section class="two" id="contato">
+    <div>
+      <div class="sec-head">
+        <p class="eyebrow">Funcionamento</p>
+        <h2>Hor&aacute;rios</h2>
+      </div>
+      <table class="hours">
+        <thead><tr><th>Dia</th><th style="text-align:right">Atendimento</th></tr></thead>
+        <tbody id="hoursBody"></tbody>
+      </table>
+    </div>
+    <div class="contact">
+      <div class="sec-head">
+        <p class="eyebrow">Onde fica</p>
+        <h2>Contato</h2>
+      </div>
+      <dl>
+        <dt>Endere&ccedil;o</dt><dd>Rua das Laranjeiras, 214 &middot; Centro</dd>
+        <dt>WhatsApp</dt><dd>(00) 00000-0000 <span class="fill">&larr; n&uacute;mero do cliente entra aqui</span></dd>
+        <dt>Instagram</dt><dd>@barbeariacortefino</dd>
+        <dt>Pagamento</dt><dd>Pix, d&eacute;bito, cr&eacute;dito e dinheiro</dd>
+      </dl>
+    </div>
+  </section>
+</div>
+
+<hr class="pole">
+
+<div class="wrap">
+  <section>
+    <blockquote>
+      <p>&ldquo;Marquei pelo WhatsApp &agrave;s dez e &agrave;s dez e meia j&aacute; estava na cadeira. Nunca mais esperei uma hora em p&eacute;.&rdquo;</p>
+      <cite>Rafael B. &middot; cliente desde 2019</cite>
+    </blockquote>
+  </section>
+  <footer>
+    <p>Barbearia Corte Fino &middot; conte&uacute;do de exemplo para demonstra&ccedil;&atilde;o de layout. Nenhuma empresa real est&aacute; representada nesta p&aacute;gina.</p>
+  </footer>
+</div>
+
+<div class="bar">
+  <div class="wrap">
+    <span id="barStatus">Atendimento por agendamento</span>
+    <a class="btn btn-solid" href="#contato">Agendar</a>
+  </div>
+</div>
+
+<script>
+  var DIAS = ["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
+  var EXP = {0:null, 1:[9,19], 2:[9,19], 3:[9,19], 4:[9,20], 5:[9,20], 6:[8,18]};
+
+  function hhmm(h){ return h + "h"; }
+
+  (function renderHours(){
+    var hoje = new Date().getDay();
+    var html = "";
+    for (var d = 1; d <= 6; d++){
+      var e = EXP[d];
+      html += '<tr' + (d === hoje ? ' class="today"' : '') + '><td>' + DIAS[d] + '</td><td>' +
+              (e ? hhmm(e[0]) + " às " + hhmm(e[1]) : "Fechado") + '</td></tr>';
+    }
+    html += '<tr' + (hoje === 0 ? ' class="today"' : '') + '><td>Domingo</td><td>Fechado</td></tr>';
+    document.getElementById("hoursBody").innerHTML = html;
+  })();
+
+  (function renderStatus(){
+    var agora = new Date();
+    var d = agora.getDay();
+    var hora = agora.getHours() + agora.getMinutes() / 60;
+    var e = EXP[d];
+    var dot = document.getElementById("dot");
+    var txt = document.getElementById("statusText");
+    var bar = document.getElementById("barStatus");
+
+    if (e && hora >= e[0] && hora < e[1]){
+      dot.className = "dot on";
+      txt.textContent = "Aberto agora · fecha às " + hhmm(e[1]);
+      bar.textContent = "Aberto até " + hhmm(e[1]);
+      return;
+    }
+    if (e && hora < e[0]){
+      dot.className = "dot off";
+      txt.textContent = "Fechado · abre hoje às " + hhmm(e[0]);
+      bar.textContent = "Abre hoje às " + hhmm(e[0]);
+      return;
+    }
+    var p = d, volta = null;
+    for (var i = 1; i <= 7; i++){
+      p = (p + 1) % 7;
+      if (EXP[p]){ volta = p; break; }
+    }
+    dot.className = "dot off";
+    var quando = (volta === (d + 1) % 7) ? "amanhã" : DIAS[volta].toLowerCase();
+    txt.textContent = "Fechado · abre " + quando + " às " + hhmm(EXP[volta][0]);
+    bar.textContent = "Abre " + quando + " às " + hhmm(EXP[volta][0]);
+  })();
+</script>
+
+</body></html>
